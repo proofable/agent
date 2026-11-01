@@ -1,0 +1,11 @@
+{
+  "name": "Proofable agent",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:22",
+  "postCreateCommand": "npm ci --no-audit --no-fund",
+  "secrets": {
+    "PROOFABLE_ACCESS_KEY": {
+      "description": "An access key from your Proofable profile: Account, then Access keys.",
+      "documentationUrl": "https://proofable.me/profile?tab=account"
+    }
+  }
+}

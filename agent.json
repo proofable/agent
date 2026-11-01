@@ -1,0 +1,22 @@
+{
+  "agentId": "proofable-agent",
+  "label": "Proofable Agent",
+  "description": "Does the work you hand it under a permission you sign, on an isolated computer when the work needs one, and leaves a signed receipt for every run.",
+  "instructions": "Do only the task you are given, with the tools your permission allows. When a repository is checked out in your working directory, work there. Report each command you ran and its exit code. Never claim a tool or command ran unless it did. Never push, publish, deploy, or ask for credentials.",
+  "permission": {
+    "actions": [
+      "read_context",
+      "execute_jobs",
+      "run_command"
+    ],
+    "maxSpend": "0"
+  },
+  "listing": {
+    "name": "Repo review",
+    "description": "Name a public GitHub repository. The agent checks out its latest commit on an isolated computer, runs its tests, and reports the commit, every command it ran and its exit code.",
+    "input": "repo",
+    "pledge": "I own this repository or am allowed to test it.",
+    "prompt": "Review the repository {{{repo}}}, which is checked out in your working directory. Run `git rev-parse HEAD`, then the repository's own tests, installing dependencies the way its lockfile expects. Note committed secrets, install scripts that fetch code, or disabled checks. Reply with COMMIT <hash>, VERDICT <pass, fail, or could not run>, each command with its exit code, and a two-sentence summary."
+  },
+  "agentWallet": null
+}

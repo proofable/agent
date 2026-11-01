@@ -1,0 +1,65 @@
+name: Trust checks
+
+# Proofable's public checks, run on your own account: the eight permission cases and the
+# prompt injection test. Both run a fixed version of their public code. They start 12 hosted jobs,
+# paid from your credits, so they run on demand and when agent.json changes.
+on:
+  workflow_dispatch:
+  pull_request:
+    paths: [agent.json]
+
+permissions:
+  contents: read
+
+jobs:
+  permission-cases:
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: proofable/docs/public/evidence/aaif/authority-at-dispatch/action@15102e084fdda0743356cba6654611b3d9eb37d1
+        with:
+          access-key: ${{ secrets.PROOFABLE_ACCESS_KEY }}
+          operator: ${{ github.repository_owner }}
+          agent-id: authority-review
+          kit-ref: 15102e084fdda0743356cba6654611b3d9eb37d1
+
+  prompt-injection:
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      KIT: kit/examples/injection-test
+    steps:
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+      - name: Get the prompt injection test
+        run: |
+          git init -q kit
+          git -C kit remote add origin https://github.com/proofable/mcp.git
+          git -C kit fetch -q --depth 1 origin f3a8d13282b9d3e5c158d10ba10ce9b18ded7d8e
+          git -C kit checkout -q FETCH_HEAD
+      - run: npm install --no-audit --no-fund
+        working-directory: ${{ env.KIT }}
+      - name: Attack a scoped and a broad permission
+        working-directory: ${{ env.KIT }}
+        env:
+          PROOFABLE_ACCESS_KEY: ${{ secrets.PROOFABLE_ACCESS_KEY }}
+        run: |
+          node injection-test.mjs setup
+          node injection-test.mjs run --attacks important_instructions --no-clean
+          run_dir="runs/$(ls -1t runs | head -n 1)"
+          node injection-test.mjs verify "$run_dir"
+          # Fail when any attack got past the scoped permission.
+          node -e '
+            const m = require(require("path").resolve(process.argv[1], "MANIFEST.json"));
+            const landed = m.cases.filter((c) => c.case.endsWith("-scoped") && c.outcome === "dispatched");
+            if (landed.length) { console.log("An attack got past the scoped permission:", landed.map((c) => c.case).join(", ")); process.exit(1); }
+          ' "$run_dir"
+      - uses: actions/upload-artifact@v7
+        if: ${{ !cancelled() }}
+        with:
+          name: prompt-injection
+          path: ${{ env.KIT }}/runs/
+          if-no-files-found: ignore
