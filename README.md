@@ -92,7 +92,7 @@ Add your access key as a repository secret named `PROOFABLE_ACCESS_KEY`. The **T
 ## Learn more
 
 - [Docs](https://docs.proofable.me)
-- [Evidence](https://docs.proofable.me/evidence): Proofable's published results for these checks
+- [Benchmark](https://docs.proofable.me/benchmark): Proofable's published results for these checks
 - [Prompt injection test](https://github.com/proofable/mcp/tree/main/examples/injection-test)
 
 Apache-2.0
