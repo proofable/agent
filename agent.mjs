@@ -5,13 +5,14 @@
  *   setup [--no-browser]                 own key and identity, then the owner signs its permission
  *   permit                               print the link that signs or renews the permission
  *   status                               identity, limits, and what the permission allows
+ *   knowledge [--dry-run]                file knowledge/ as the records the agent answers from and cites
  *   job "<task>" [--repo owner/name] [--ref <commit>] [--computer]
  *   verify [run folder | latest]         check a job's signed records offline
  *   listing [--publish]                  save the listing that runs as this agent
  */
 import { createHash } from 'node:crypto';
 import { chmodSync, existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
-import { join, resolve } from 'node:path';
+import { join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { Wallet } from 'ethers';
 import { getHostedAgentCreateUrl, verifyPortableProofEnvelope } from '@proofable/sdk';
@@ -366,6 +367,98 @@ async function listing(flags) {
   console.log(flags.publish ? `Share it: https://proofable.me/verify?gateId=${saved.gateId}` : 'Check it under Listings at https://proofable.me/profile?tab=portals, then run `npm run listing -- --publish`.');
 }
 
+// ── knowledge: the records the agent answers from and cites ─────────────────────────────
+const KNOWLEDGE_DIR = resolve('knowledge');
+const FACETS = ['memory', 'rule', 'instruction', 'research', 'skill', 'tool'];
+
+/** Every .md and .txt file under knowledge/, read as it is on disk. Paths are relative, lowercase, with `/`. */
+function knowledgeFiles(dir = KNOWLEDGE_DIR, out = []) {
+  if (!existsSync(dir)) return out;
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    if (entry.name.startsWith('.')) continue;
+    const full = join(dir, entry.name);
+    if (entry.isDirectory()) knowledgeFiles(full, out);
+    else if (/\.(md|txt)$/i.test(entry.name)) {
+      const path = relative(KNOWLEDGE_DIR, full).split(sep).join('/').toLowerCase();
+      const text = readFileSync(full, 'utf8');
+      out.push({ path, content: text.charCodeAt(0) === 0xfeff ? text.slice(1) : text });
+    }
+  }
+  return out;
+}
+
+/** The facet is the file's folder (knowledge/rule/never-say.md is a rule); anything else is memory. */
+function facetOf(path) {
+  const top = path.split('/')[0].replace(/ies$/, 'y').replace(/s$/, '');
+  return path.includes('/') && FACETS.includes(top) ? top : 'memory';
+}
+
+const titleOf = (file) => (/^#{1,3}\s+(.+)$/m.exec(file.content)?.[1] || file.path.replace(/\.(md|txt)$/i, '')).trim().slice(0, 200);
+
+/** The records filed from knowledge/ before, by path. */
+async function filedKnowledge(agentId) {
+  const filed = new Map();
+  for (let offset = 0; ; offset += 25) {
+    const page = await tool('proofable_proofs_get', { tagPrefixesAll: [`agent:${agentId}`, 'file:'], limit: 25, offset });
+    for (const p of page?.data?.proofs || []) {
+      const tags = p.tags || p.meta?.tags || [];
+      const path = tags.find((t) => t.startsWith('file:'))?.slice(5);
+      if (tags.includes(`agent:${agentId}`) && path && QHASH.test(String(p.qHash))) {
+        filed.set(path, { qHash: p.qHash, sha: tags.find((t) => t.startsWith('sha256:'))?.slice(7) });
+      }
+    }
+    if (!page?.data?.pagination?.hasMore) return filed;
+  }
+}
+
+async function revoke(qHash) {
+  const res = await tool('proofable_proof_revoke', { qHash });
+  if (res?.success !== true) throw new Error(`Could not remove ${qHash}: ${JSON.stringify(res?.message || res).slice(0, 300)}`);
+}
+
+/**
+ * knowledge/ is the source: each file becomes one record the agent reads and cites, exactly as
+ * written. A changed file replaces its record, a removed file removes it, an unchanged one is left.
+ */
+async function knowledge(flags) {
+  const agent = readAgent();
+  const files = knowledgeFiles();
+  if (!files.length) throw new Error('Put the agent\'s knowledge in knowledge/ as .md or .txt files, one record per file.');
+  const topic = String(agent.knowledge?.topic || agent.agentId).toLowerCase();
+  const privacyLevel = agent.knowledge?.visibility === 'public' ? 'public' : 'private';
+  const filed = await filedKnowledge(agent.agentId);
+  const plan = files.map((file) => {
+    const sha = sha256(file.content).slice(0, 16);
+    const before = filed.get(file.path);
+    return { ...file, sha, before, action: !before ? 'add' : before.sha === sha ? 'keep' : 'replace' };
+  });
+  const removed = [...filed].filter(([path]) => !files.some((file) => file.path === path));
+  for (const f of plan) console.log(`  ${f.action.padEnd(8)} ${f.path}  ${facetOf(f.path)}, ${Buffer.byteLength(f.content)} bytes`);
+  for (const [path] of removed) console.log(`  ${'remove'.padEnd(8)} ${path}`);
+  if (flags['dry-run']) {
+    console.log('Dry run: nothing filed.');
+    return;
+  }
+
+  for (const f of plan.filter((p) => p.action !== 'keep')) {
+    const res = await tool('proofable_verify', {
+      verifierIds: ['ownership-basic'],
+      data: { content: f.content },
+      options: {
+        privacyLevel,
+        meta: {
+          title: titleOf(f),
+          tags: [`facet:${facetOf(f.path)}`, `topic:${topic}`, `agent:${agent.agentId}`, `file:${f.path}`, `sha256:${f.sha}`],
+        },
+      },
+    });
+    if (!QHASH.test(String(res?.qHash || ''))) throw new Error(`${f.path} was not filed: ${JSON.stringify(res?.message || res).slice(0, 300)}`);
+    if (f.before) await revoke(f.before.qHash);
+  }
+  for (const [, before] of removed) await revoke(before.qHash);
+  console.log(`${agent.label} answers from ${files.length} ${privacyLevel} record${files.length === 1 ? '' : 's'} tagged topic:${topic}.`);
+}
+
 // ── entry ───────────────────────────────────────────────────────────────────────────────
 function parse(argv) {
   const args = [];
@@ -386,12 +479,13 @@ const commands = {
   job: ({ args, flags }) => job(args, flags),
   verify: async ({ args }) => { if (!(await verify(args))) process.exitCode = 1; },
   listing: ({ flags }) => listing(flags),
+  knowledge: ({ flags }) => knowledge(flags),
 };
 // Run as a command; imported as a module, it only exports.
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const [name, ...rest] = process.argv.slice(2);
   if (!commands[name]) {
-    console.log('usage: node agent.mjs <setup | permit | status | job "<task>" [--repo owner/name] [--ref <commit>] [--computer] | verify [run] | listing [--publish]>');
+    console.log('usage: node agent.mjs <setup | permit | status | knowledge [--dry-run] | job "<task>" [--repo owner/name] [--ref <commit>] [--computer] | verify [run] | listing [--publish]>');
     process.exitCode = name ? 1 : 0;
   } else {
     commands[name](parse(rest))
