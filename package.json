@@ -9,13 +9,14 @@
     "setup": "node agent.mjs setup",
     "permit": "node agent.mjs permit",
     "status": "node agent.mjs status",
+    "knowledge": "node agent.mjs knowledge",
     "job": "node agent.mjs job",
     "verify": "node agent.mjs verify",
     "listing": "node agent.mjs listing"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.32.2",
-    "@proofable/sdk": "^0.1.10",
+    "@proofable/sdk": "^0.1.11",
     "ethers": "^6.17.0"
   },
   "engines": {

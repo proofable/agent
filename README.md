@@ -50,6 +50,17 @@ npx -y @proofable/sdk mount proofable-agent --apply claude
 
 **From this repository**, `npm run job` runs a task as the agent on an isolated computer, and `npm run verify` checks its receipt offline. Give each place you run it its own access key, so you can revoke one without the others.
 
+## Give it knowledge
+
+Put what the agent should know in `knowledge/`, one file per subject. The folder sets the kind of record: `knowledge/rule/` for limits such as what it must never say, `knowledge/instruction/` for voice, `knowledge/research/` for sourced material, and anything else is memory.
+
+```bash
+npm run knowledge -- --dry-run
+npm run knowledge
+```
+
+Each file becomes one record, filed as written. The agent reads them when it answers and cites the ones it used. Edit a file and run it again: that record is replaced and the rest are left alone. Delete a file and its record goes too. Records are private unless `knowledge.visibility` is `public`, and a reader who opens a private citation sees that it is private.
+
 ## Already run an agent?
 
 Bring it as it is: a GitHub repository, an MCP server URL, an A2A agent card, or a package. Secrets stay out of the import.
@@ -69,6 +80,7 @@ npx -y @proofable/sdk mount <agentId> --apply claude
 | `setup` | Creates the agent's key and identity, then prints the permission link |
 | `permit` | Prints the link again, to renew the permission or sign new limits |
 | `status` | Shows the permission and which actions it allows or refuses |
+| `knowledge` | Files `knowledge/` as the records the agent answers from and cites. `-- --dry-run` shows what would change. |
 | `job "<task>"` | Runs a task. `--repo owner/name` checks out a public repository on an isolated computer (`--ref` picks the commit); `--computer` asks for one without a repository. |
 | `verify` | Checks the latest run's receipt and dispatch decision offline, with no network and no account. Pass a folder under `runs/` to check another run. |
 | `listing` | Saves an AI service listing that runs as this agent, as a draft. `-- --publish` puts it live. |
@@ -83,6 +95,7 @@ Edit `agent.json`, then run `npm run setup`.
 | `permission.actions` | The only actions it may take; anything else is refused before it runs |
 | `permission.expiresInDays` | When access ends. Leave it out and the permission has no end date until you revoke it. |
 | `permission.maxSpend` | Spend cap in USDC base units (`1000000` is 1 USDC); `0` for an agent that never pays |
+| `knowledge.topic`, `knowledge.visibility` | The topic its knowledge is filed under (the agent id when left out), and `private` (the default) or `public` records |
 | `listing` | The service buyers order: name, description, the repository input, and the prompt each order runs |
 
 ## CI
