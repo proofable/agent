@@ -9,7 +9,6 @@
     "setup": "node agent.mjs setup",
     "permit": "node agent.mjs permit",
     "status": "node agent.mjs status",
-    "knowledge": "node agent.mjs knowledge",
     "job": "node agent.mjs job",
     "verify": "node agent.mjs verify",
     "listing": "node agent.mjs listing"
