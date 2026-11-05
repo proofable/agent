@@ -19,7 +19,7 @@ npm run job -- "Run the tests and report each exit code" --repo proofable/mcp
 npm run verify
 ```
 
-`setup` gives the agent its own key in `.agent/` and signs its identity, then prints a link. Open the link, check the limits, and sign with your wallet. Commit `agent.json` afterwards: it holds the agent's public account. Each job is one hosted run paid from your credits.
+`setup` gives the agent its own key in `.agent/` and signs its identity, then prints a link. Open the link, check the limits, and sign with your wallet. Commit `agent.json` afterwards. It holds the agent's public account. Each job is one hosted run paid from your credits.
 
 ## Run it anywhere
 
