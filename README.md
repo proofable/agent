@@ -1,13 +1,15 @@
-<p align="center">
-  <img src="images/proofable-lockup-light-mode.svg#gh-light-mode-only" alt="Proofable" width="480">
-  <img src="images/proofable-lockup-dark-mode.svg#gh-dark-mode-only" alt="Proofable" width="480">
-</p>
-
 <h1 align="center">An AI agent that runs on a permission you sign, not your keys</h1>
 
 <p align="center">
+  <a href="https://docs.proofable.me/benchmark"><img src="https://img.shields.io/badge/NVIDIA_Agent_Gauntlet-Winner-2F5097" alt="NVIDIA Agent Gauntlet: Winner"></a>
+  <a href="https://docs.proofable.me/benchmark"><img src="https://img.shields.io/badge/AgentDojo-6.2%25_attacks_through-2F5097" alt="AgentDojo: 6.2% of attacks through"></a>
+  <a href="https://docs.proofable.me/benchmark"><img src="https://img.shields.io/badge/Hijacked_agent-0%2F6_data_sent_out-2F5097" alt="Hijacked agent: 0 of 6 data sent out"></a>
+  <a href="https://docs.proofable.me/benchmark"><img src="https://img.shields.io/badge/Forgery_test-150%2F150_caught-2F5097" alt="Forgery test: 150 of 150 caught"></a>
+</p>
+
+<p align="center">
   <a href="https://www.npmjs.com/package/@proofable/sdk"><img src="https://img.shields.io/npm/v/%40proofable%2Fsdk?label=%40proofable%2Fsdk&color=98C0EF" alt="npm"></a>
-  <a href="./LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-blue.svg" alt="Apache-2.0"></a>
+  <a href="https://github.com/proofable/sdk/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-blue.svg" alt="Apache-2.0"></a>
   <a href="https://docs.proofable.me"><img src="https://img.shields.io/badge/docs-proofable.me-0369a1" alt="Docs"></a>
   <a href="https://discord.gg/cpNJVuq4UW"><img src="https://img.shields.io/badge/discord-community-5865F2?logo=discord&logoColor=white" alt="Discord"></a>
 </p>
@@ -19,7 +21,16 @@
   |
   <a href="https://docs.proofable.me/benchmark">Benchmarks</a>
   |
+  <a href="https://github.com/proofable/agent">Agent template</a>
+  |
   <a href="https://codespaces.new/proofable/agent">Open in Codespaces</a>
+</p>
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="images/terminal-dark.svg">
+    <img src="images/terminal-light.svg" width="760" alt="An agent refunds an order it is allowed to, is stopped before running a command it was never given, and every receipt survives a forgery check">
+  </picture>
 </p>
 
 ⭐ *Help us reach more developers. Star this repo!*
@@ -27,6 +38,19 @@
 Proofable checks every action this agent takes, from your AI tools, a hosted runtime or CI, against a permission you sign, outside the agent and before it runs, and leaves a signed receipt anyone can verify offline.
 
 **Agents that can't do what you never allowed.**
+
+---
+
+## Where it stands
+
+| Benchmark | Result |
+|---|---|
+| **NVIDIA Agent Gauntlet** | Winner. The top score of the tournament, 98.00, across 20 teams and 11 live heats, with every call checked before it ran |
+| **AgentDojo**, same model | Injections that reached the tools fell from 16.4% to **6.2%**, with 87% of tasks still done |
+| **Hijacked agent** | **0 of 6** data-theft attempts got out, against 6 of 6 on an all-purpose key |
+| **Forgery test** | **150 of 150** forged receipts caught. [Run it yourself](https://github.com/proofable/docs/tree/main/public/evidence/checks), no account needed |
+
+Sources and method for every row: [docs.proofable.me/benchmark](https://docs.proofable.me/benchmark).
 
 ---
 
