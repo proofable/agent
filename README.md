@@ -50,6 +50,7 @@ Proofable checks every action this agent takes, from your AI tools, a hosted run
 | **NVIDIA Agent Gauntlet** | Winner. The top score of the tournament, 98.00, across 20 teams and 11 live heats, with every call checked before it ran |
 | **Agent memory** (PrecisionMemBench) | **77 of 77** cases. Hindsight passed 66 on the same open toolkit; Mem0 and Zep passed 9. Finding the current rule takes 11.1× fewer tokens than searching every record |
 | **Agent rules** (AgentGovBench) | **48 of 48** scenarios. The best gateway handled 46; coding agents on their own handled 13 |
+| **PrecisionMemBench** | **77 of 77**: the current fact every time, nothing replaced, nothing from the wrong user. Mem0, Zep and Cognee score 9 of 77 on the author's table; the author's own system also scores 77 |
 | **AgentDojo**, same model | **93.8%** of injected attacks stopped, against 83.6% for the same agent without Proofable, with 87% of tasks still done |
 | **Hijacked agent** | **0 of 6** data-theft attempts got out, against 6 of 6 on an all-purpose key |
 | **Forgery test** | **150 of 150** forged receipts caught. [Run it yourself](https://github.com/proofable/docs/tree/main/public/evidence/checks), no account needed |
