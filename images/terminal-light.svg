@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="422" viewBox="0 0 760 422" role="img" aria-label="An agent refunds an order it is allowed to, is stopped before running a command it was never given, and every receipt survives a forgery check">
+<title>An agent refunds an order it is allowed to, is stopped before running a command it was never given, and every receipt survives a forgery check</title>
+<defs><filter id="s" x="-5%" y="-5%" width="110%" height="120%"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="rgba(8,10,14,0.10)"/></filter></defs>
+<style>
+text{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace;font-size:15px;dominant-baseline:alphabetic}
+.t{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:12px}
+@keyframes r0{0%,3.524%{opacity:0}4.588%,95.882%{opacity:1}100%{opacity:0}}
+#e0{animation:r0 17s linear infinite}
+@keyframes k0{0%,3.529%{transform:translateX(0)}8.729%,100%{transform:translateX(234.0px)}}
+#k0{animation:k0 17s steps(26,end) infinite;transform:translateX(234.0px)}
+@keyframes u0{0%,3.529%{opacity:0}3.535%,10.494%{opacity:1}10.500%,100%{opacity:0}}
+#u0{animation:u0 17s steps(1,end) infinite;opacity:0}
+@keyframes r1{0%,10.488%{opacity:0}11.553%,95.882%{opacity:1}100%{opacity:0}}
+#e1{animation:r1 17s linear infinite}
+@keyframes r2{0%,12.135%{opacity:0}13.200%,95.882%{opacity:1}100%{opacity:0}}
+#e2{animation:r2 17s linear infinite}
+@keyframes r3{0%,13.782%{opacity:0}14.847%,95.882%{opacity:1}100%{opacity:0}}
+#e3{animation:r3 17s linear infinite}
+@keyframes r4{0%,15.429%{opacity:0}16.494%,95.882%{opacity:1}100%{opacity:0}}
+#e4{animation:r4 17s linear infinite}
+@keyframes r5{0%,22.371%{opacity:0}23.435%,95.882%{opacity:1}100%{opacity:0}}
+#e5{animation:r5 17s linear infinite}
+@keyframes k5{0%,22.376%{transform:translateX(0)}27.776%,100%{transform:translateX(243.0px)}}
+#k5{animation:k5 17s steps(27,end) infinite;transform:translateX(243.0px)}
+@keyframes u5{0%,22.376%{opacity:0}22.382%,29.541%{opacity:1}29.547%,100%{opacity:0}}
+#u5{animation:u5 17s steps(1,end) infinite;opacity:0}
+@keyframes r6{0%,29.535%{opacity:0}30.600%,95.882%{opacity:1}100%{opacity:0}}
+#e6{animation:r6 17s linear infinite}
+@keyframes r7{0%,31.182%{opacity:0}32.247%,95.882%{opacity:1}100%{opacity:0}}
+#e7{animation:r7 17s linear infinite}
+@keyframes r8{0%,38.124%{opacity:0}39.188%,95.882%{opacity:1}100%{opacity:0}}
+#e8{animation:r8 17s linear infinite}
+@keyframes k8{0%,38.129%{transform:translateX(0)}42.329%,100%{transform:translateX(189.0px)}}
+#k8{animation:k8 17s steps(21,end) infinite;transform:translateX(189.0px)}
+@keyframes u8{0%,38.129%{opacity:0}38.135%,44.094%{opacity:1}44.100%,100%{opacity:0}}
+#u8{animation:u8 17s steps(1,end) infinite;opacity:0}
+@keyframes r9{0%,44.088%{opacity:0}45.153%,95.882%{opacity:1}100%{opacity:0}}
+#e9{animation:r9 17s linear infinite}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}g[id^="k"]{display:none}}
+</style>
+<g filter="url(#s)"><rect x="1" y="1" width="758" height="398" rx="14" fill="#FFFFFF" stroke="rgba(52,54,60,0.14)"/></g>
+<path d="M1 15a14 14 0 0 1 14-14h728a14 14 0 0 1 14 14v25H1z" fill="rgba(52,54,60,0.06)"/>
+<circle cx="22" cy="21" r="5" fill="rgba(52,54,60,0.22)"/><circle cx="40" cy="21" r="5" fill="rgba(52,54,60,0.22)"/><circle cx="58" cy="21" r="5" fill="rgba(52,54,60,0.22)"/>
+<text class="t" x="380" y="25" text-anchor="middle" fill="rgba(8,10,14,0.56)">Operator, acting for atlas</text>
+<g id="e0"><text x="32" y="72" fill="#2F5097" font-weight="600">›</text><text x="50" y="72" fill="rgba(8,10,14,0.92)" textLength="234" lengthAdjust="spacing">Refund order 4821 for $18.</text><g id="k0"><rect x="50" y="55" width="243" height="27" fill="#FFFFFF"/><rect id="u0" x="50" y="58" width="9" height="19" fill="rgba(8,10,14,0.92)"/></g></g>
+<g id="e1"><text x="50" y="99" fill="#147638">✓</text><text x="68" y="99" fill="rgba(8,10,14,0.68)" textLength="144.0" lengthAdjust="spacing">Acting for atlas</text></g>
+<g id="e2"><text x="50" y="126" fill="#147638">✓</text><text x="68" y="126" fill="rgba(8,10,14,0.68)" textLength="162.0" lengthAdjust="spacing">Permission current</text></g>
+<g id="e3"><text x="50" y="153" fill="#147638">✓</text><text x="68" y="153" fill="rgba(8,10,14,0.68)" textLength="189.0" lengthAdjust="spacing">Send payments allowed</text></g>
+<g id="e4"><text x="50" y="180" fill="#2F5097">→</text><text x="68" y="180" fill="rgba(8,10,14,0.92)" font-weight="600" textLength="288.0" lengthAdjust="spacing">Refunded. Proof ID 0x8f2c...4a19</text></g>
+<g id="e5"><text x="32" y="219" fill="#2F5097" font-weight="600">›</text><text x="50" y="219" fill="rgba(8,10,14,0.92)" textLength="243" lengthAdjust="spacing">Run a script on the server.</text><g id="k5"><rect x="50" y="202" width="252" height="27" fill="#FFFFFF"/><rect id="u5" x="50" y="205" width="9" height="19" fill="rgba(8,10,14,0.92)"/></g></g>
+<g id="e6"><text x="50" y="246" fill="#B83232">✕</text><text x="68" y="246" fill="#B83232" textLength="180.0" lengthAdjust="spacing">Run commands blocked</text></g>
+<g id="e7"><text x="50" y="273" fill="#2F5097">→</text><text x="68" y="273" fill="rgba(8,10,14,0.92)" font-weight="600" textLength="189.0" lengthAdjust="spacing">Stopped before it ran</text></g>
+<g id="e8"><text x="32" y="312" fill="#2F5097" font-weight="600">$</text><text x="50" y="312" fill="rgba(8,10,14,0.92)" textLength="189" lengthAdjust="spacing">node tamper-check.mjs</text><g id="k8"><rect x="50" y="295" width="198" height="27" fill="#FFFFFF"/><rect id="u8" x="50" y="298" width="9" height="19" fill="rgba(8,10,14,0.92)"/></g></g>
+<g id="e9"><text x="50" y="339" fill="#2F5097">→</text><text x="68" y="339" fill="rgba(8,10,14,0.92)" font-weight="600" textLength="288.0" lengthAdjust="spacing">150 forgery attempts, 150 caught</text></g>
+</svg>
