@@ -1,10 +1,50 @@
-# Proofable Agent
+<p align="center">
+  <img src="images/proofable-lockup-light-mode.svg#gh-light-mode-only" alt="Proofable" width="480">
+  <img src="images/proofable-lockup-dark-mode.svg#gh-dark-mode-only" alt="Proofable" width="480">
+</p>
 
-An AI agent that runs on a permission you sign instead of your keys. Proofable checks every action outside the agent before it runs, the work can run on an isolated computer, and every run leaves a signed receipt anyone can verify offline.
+<h1 align="center">An AI agent that runs on a permission you sign, not your keys</h1>
 
-The permission lives with Proofable, not with the runtime. Run the agent from your AI tools, a hosted runtime or CI, and the same limits hold in each one. Revoke it once and every copy stops.
+<p align="center">
+  <a href="https://www.npmjs.com/package/@proofable/sdk"><img src="https://img.shields.io/npm/v/%40proofable%2Fsdk?label=%40proofable%2Fsdk&color=98C0EF" alt="npm"></a>
+  <a href="./LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-blue.svg" alt="Apache-2.0"></a>
+  <a href="https://docs.proofable.me"><img src="https://img.shields.io/badge/docs-proofable.me-0369a1" alt="Docs"></a>
+  <a href="https://discord.gg/cpNJVuq4UW"><img src="https://img.shields.io/badge/discord-community-5865F2?logo=discord&logoColor=white" alt="Discord"></a>
+</p>
+
+<p align="center">
+  <a href="https://proofable.me">Website</a>
+  |
+  <a href="https://docs.proofable.me">Docs</a>
+  |
+  <a href="https://docs.proofable.me/benchmark">Benchmarks</a>
+  |
+  <a href="https://codespaces.new/proofable/agent">Open in Codespaces</a>
+</p>
+
+⭐ *Help us reach more developers. Star this repo!*
+
+Proofable checks every action this agent takes, from your AI tools, a hosted runtime or CI, against a permission you sign, outside the agent and before it runs, and leaves a signed receipt anyone can verify offline.
+
+**Agents that can't do what you never allowed.**
+
+---
+
+## Overview
+
+The permission lives with Proofable, not with the runtime. Run the agent anywhere and the same limits hold in each place. Revoke it once and every copy stops. A prompt-injected agent still can't cross the line, because the decision is made outside its process.
+
+**Key Capabilities:**
+
+- **Its own identity** - a key and a signed identity tied to you, created by `npm run setup`
+- **A permission instead of a key** - the actions it may take, a spend cap and an end date, checked before every call
+- **Isolated computer** - jobs can run on a sealed machine with a checked-out repository
+- **Receipts that verify offline** - `npm run verify` checks a run with no network and no account
+- **Trust checks in CI** - the live permission cases and the prompt injection test on every pull request that changes `agent.json`
 
 Click **Use this template** for your own copy, or [open it in Codespaces](https://codespaces.new/proofable/agent).
+
+---
 
 ## Quick start
 
