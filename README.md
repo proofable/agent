@@ -54,7 +54,7 @@ Proofable checks every action this agent takes, from your AI tools, a hosted run
 | **Hijacked agent** | **0 of 6** data-theft attempts got out, against 6 of 6 on an all-purpose key |
 | **Forgery test** | **150 of 150** forged receipts caught. [Run it yourself](https://github.com/proofable/docs/tree/main/public/evidence/checks), no account needed |
 
-Charts and side-by-side comparisons: [proofable.me/benchmarks](https://proofable.me/benchmarks). Sources, method and a public proof for every row: [docs.proofable.me/benchmark](https://docs.proofable.me/benchmark).
+Charts and side-by-side comparisons: [proofable.me/benchmarks](https://proofable.me/benchmarks). Sources, method and the raw results for every row: [docs.proofable.me/benchmark](https://docs.proofable.me/benchmark).
 
 ---
 
