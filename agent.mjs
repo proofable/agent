@@ -287,7 +287,14 @@ async function job(args, flags) {
 // ── offline check, from the run folder alone ────────────────────────────────────────────
 export async function verify(args) {
   let dir = String(args[0] || 'latest');
-  if (dir === 'latest') dir = join(RUNS, readFileSync(join(RUNS, 'LATEST'), 'utf8').trim());
+  if (dir === 'latest') {
+    if (!existsSync(join(RUNS, 'LATEST'))) {
+      console.log('No runs yet. `npm run job` records one, then `npm run verify` checks it offline.');
+      console.log('To check real receipts without an account: https://github.com/proofable/docs/tree/main/public/evidence/checks');
+      return false;
+    }
+    dir = join(RUNS, readFileSync(join(RUNS, 'LATEST'), 'utf8').trim());
+  }
   dir = resolve(dir);
   const failed = [];
   const check = (ok, what) => { console.log(`  ${ok ? 'ok  ' : 'FAIL'} ${what}`); if (!ok) failed.push(what); };
