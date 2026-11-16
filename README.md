@@ -1,4 +1,4 @@
-<h1 align="center">An AI agent that runs on a permission you sign, not your keys</h1>
+<h1 align="center">An AI agent that can only do what you allow</h1>
 
 <p align="center">
   <a href="https://docs.proofable.me/benchmark"><img src="https://img.shields.io/badge/NVIDIA_Live_Agent_Gauntlet-Winner-2F5097" alt="NVIDIA Live Agent Gauntlet: Winner"></a>
