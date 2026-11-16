@@ -49,12 +49,12 @@ node tamper-check.mjs
 
 ## Where it stands
 
-| Public benchmark | Result |
+The results come from the design, not from tuning for a test: every action is checked against a permission its owner signed before it runs, and leaves a receipt anyone can verify. Two industry benchmarks:
+
+| Benchmark | Result |
 |---|---|
 | **NVIDIA Live Agent Gauntlet** | Winner. The top score of the tournament, 98.00, across 20 teams and 11 live heats, with every call checked before it ran |
 | **AgentDojo** (ETH Zurich, prompt injection) | Attacks that landed fell from 16.4% to 6.2% on the same model, with 87% of tasks still done under attack |
-| **PrecisionMemBench** (agent memory) | **77 of 77** cases. Hindsight passed 66 on the same open toolkit; Mem0 and Zep passed 9 |
-| **AgentGovBench** (agent governance) | **48 of 48** scenarios. The best gateway handled 46; coding agents on their own handled 13 |
 
 Method, sources and raw results for every row, plus our own tests (a hijacked agent, forged receipts) with how to rerun them: [docs.proofable.me/benchmark](https://docs.proofable.me/benchmark). The forgery test runs with [no account](https://github.com/proofable/docs/tree/main/public/evidence/checks).
 
