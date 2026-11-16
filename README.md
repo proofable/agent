@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="https://docs.proofable.me/benchmark"><img src="https://img.shields.io/badge/NVIDIA_Live_Agent_Gauntlet-Winner-2F5097" alt="NVIDIA Live Agent Gauntlet: Winner"></a>
-  <a href="https://proofable.me/benchmarks/security"><img src="https://img.shields.io/badge/AgentDojo-93.8%25_attacks_stopped-2F5097" alt="AgentDojo: 93.8% of attacks stopped"></a>
+  <a href="https://proofable.me/benchmarks/security"><img src="https://img.shields.io/badge/AgentDojo-attacks_landing_16.4%25_%E2%86%92_6.2%25-2F5097" alt="AgentDojo: attacks that landed fell from 16.4% to 6.2%"></a>
 </p>
 
 <p align="center">
@@ -34,6 +34,16 @@
 Proofable checks every action this agent takes, from your AI tools, a hosted runtime or CI, against a permission you sign, outside the agent and before it runs, and leaves a signed receipt anyone can verify offline.
 
 **Agents that can't do what you never allowed.**
+
+### Check it without an account
+
+About two minutes. This changes 15 real receipts ten ways each and verifies every copy offline: each changed copy fails, each real one passes.
+
+```bash
+git clone --depth 1 https://github.com/proofable/docs
+cd docs/public/evidence/checks && npm install
+node tamper-check.mjs
+```
 
 ---
 
