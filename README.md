@@ -37,7 +37,7 @@ Proofable checks every action this agent takes, from your AI tools, a hosted run
 
 ### Check it without an account
 
-About two minutes. This changes 15 real receipts ten ways each and verifies every copy offline: each changed copy fails, each real one passes.
+About two minutes. It forges 15 real receipts ten ways each. Every forgery fails, every real one passes.
 
 ```bash
 git clone --depth 1 https://github.com/proofable/docs
@@ -49,7 +49,7 @@ node tamper-check.mjs
 
 ## Where it stands
 
-The results come from the design, not from tuning for a test: every action is checked against a permission its owner signed before it runs, and leaves a receipt anyone can verify. These are examples; the same checks hold on any benchmark.
+Every action is checked against a permission its owner signed before it runs, and leaves a receipt anyone can verify. Same checks on every benchmark.
 
 | Benchmark | Result |
 |---|---|
