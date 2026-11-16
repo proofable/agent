@@ -2,11 +2,7 @@
 
 <p align="center">
   <a href="https://docs.proofable.me/benchmark"><img src="https://img.shields.io/badge/NVIDIA_Live_Agent_Gauntlet-Winner-2F5097" alt="NVIDIA Live Agent Gauntlet: Winner"></a>
-  <a href="https://proofable.me/benchmarks/memory"><img src="https://img.shields.io/badge/PrecisionMemBench-77%2F77-2F5097" alt="PrecisionMemBench: 77 of 77"></a>
-  <a href="https://proofable.me/benchmarks/governance"><img src="https://img.shields.io/badge/AgentGovBench-48%2F48-2F5097" alt="AgentGovBench: 48 of 48"></a>
-  <a href="https://proofable.me/benchmarks/security"><img src="https://img.shields.io/badge/AgentDojo-93.8%25_attacks_stopped-2F5097" alt="AgentDojo: 93.8% of attacks stopped"></a>
-  <a href="https://docs.proofable.me/benchmark"><img src="https://img.shields.io/badge/Hijacked_agent-0%2F6_data_sent_out-2F5097" alt="Hijacked agent: 0 of 6 data sent out"></a>
-  <a href="https://docs.proofable.me/benchmark"><img src="https://img.shields.io/badge/Forgery_test-150%2F150_caught-2F5097" alt="Forgery test: 150 of 150 caught"></a>
+  <a href="https://proofable.me/benchmarks/security"><img src="https://img.shields.io/badge/AgentDojo-attacks_landing_16.4%25_%E2%86%92_6.2%25-2F5097" alt="AgentDojo: attacks that landed fell from 16.4% to 6.2%"></a>
 </p>
 
 <p align="center">
@@ -35,26 +31,32 @@
   </picture>
 </p>
 
-⭐ *Help us reach more developers. Star this repo!*
-
 Proofable checks every action this agent takes, from your AI tools, a hosted runtime or CI, against a permission you sign, outside the agent and before it runs, and leaves a signed receipt anyone can verify offline.
 
 **Agents that can't do what you never allowed.**
+
+### Check it without an account
+
+About two minutes. This changes 15 real receipts ten ways each and verifies every copy offline: each changed copy fails, each real one passes.
+
+```bash
+git clone --depth 1 https://github.com/proofable/docs
+cd docs/public/evidence/checks && npm install
+node tamper-check.mjs
+```
 
 ---
 
 ## Where it stands
 
+The results come from the design, not from tuning for a test: every action is checked against a permission its owner signed before it runs, and leaves a receipt anyone can verify. Two industry benchmarks:
+
 | Benchmark | Result |
 |---|---|
 | **NVIDIA Live Agent Gauntlet** | Winner. The top score of the tournament, 98.00, across 20 teams and 11 live heats, with every call checked before it ran |
-| **Agent memory** (PrecisionMemBench) | **77 of 77** cases. Hindsight passed 66 on the same open toolkit; Mem0 and Zep passed 9. Finding the current rule takes 11.1× fewer tokens than searching every record |
-| **Agent rules** (AgentGovBench) | **48 of 48** scenarios. The best gateway handled 46; coding agents on their own handled 13 |
-| **AgentDojo**, same model | **93.8%** of injected attacks stopped, against 83.6% for the same agent without Proofable, with 87% of tasks still done |
-| **Hijacked agent** | **0 of 6** data-theft attempts got out, against 6 of 6 on an all-purpose key |
-| **Forgery test** | **150 of 150** forged receipts caught. [Run it yourself](https://github.com/proofable/docs/tree/main/public/evidence/checks), no account needed |
+| **AgentDojo** (ETH Zurich, prompt injection) | Attacks that landed fell from 16.4% to 6.2% on the same model, with 87% of tasks still done under attack |
 
-Charts and side-by-side comparisons: [proofable.me/benchmarks](https://proofable.me/benchmarks). Sources, method and the raw results for every row: [docs.proofable.me/benchmark](https://docs.proofable.me/benchmark).
+Method, sources and raw results for every row, plus our own tests (a hijacked agent, forged receipts) with how to rerun them: [docs.proofable.me/benchmark](https://docs.proofable.me/benchmark). The forgery test runs with [no account](https://github.com/proofable/docs/tree/main/public/evidence/checks).
 
 ---
 
