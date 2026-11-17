@@ -270,7 +270,7 @@ export async function recordRun(agent, run, state, t = tool) {
   const files = readdirSync(dir).sort();
   writeFileSync(join(dir, 'SHA256SUMS'), `${files.map((f) => `${sha256(readFileSync(join(dir, f)))}  ${f}`).join('\n')}\n`);
   writeFileSync(join(RUNS, 'LATEST'), `${runId}\n`);
-  return { dir, response };
+  return { dir, response, receipt };
 }
 
 async function job(args, flags) {
@@ -279,8 +279,9 @@ async function job(args, flags) {
   const run = await dispatch(agent, spec);
   const repo = spec.runtime?.repo;
   console.log(`Job ${run.jobId}${repo ? ` on ${repo.slug}@${repo.ref.slice(0, 12)}` : ''}${spec.runtime ? ', on an isolated computer' : ''} …`);
-  const { dir, response } = await recordRun(agent, run, await waitForJob(run.jobId));
+  const { dir, response, receipt } = await recordRun(agent, run, await waitForJob(run.jobId));
   console.log(`\n${response}\n`);
+  if (receipt) console.log(`Receipt  https://proofable.me/proof/${receipt}\n`);
   if (!(await verify([dir]))) process.exitCode = 1;
 }
 
