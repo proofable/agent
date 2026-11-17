@@ -1,11 +1,6 @@
 <h1 align="center">An AI agent that can only do what you allow</h1>
 
 <p align="center">
-  <a href="https://docs.proofable.me/benchmark"><img src="https://img.shields.io/badge/NVIDIA_Live_Agent_Gauntlet-Winner-2F5097" alt="NVIDIA Live Agent Gauntlet: Winner"></a>
-  <a href="https://proofable.me/benchmarks/security"><img src="https://img.shields.io/badge/AgentDojo-attacks_landing_16.4%25_%E2%86%92_6.2%25-2F5097" alt="AgentDojo: attacks that landed fell from 16.4% to 6.2%"></a>
-</p>
-
-<p align="center">
   <a href="https://www.npmjs.com/package/@proofable/sdk"><img src="https://img.shields.io/npm/v/%40proofable%2Fsdk?label=%40proofable%2Fsdk&color=98C0EF" alt="npm"></a>
   <a href="https://github.com/proofable/sdk/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-blue.svg" alt="Apache-2.0"></a>
   <a href="https://docs.proofable.me"><img src="https://img.shields.io/badge/docs-proofable.me-0369a1" alt="Docs"></a>
@@ -33,40 +28,10 @@
 
 Proofable checks every action this agent takes, from your AI tools, a hosted runtime or CI, against a permission you sign, outside the agent and before it runs, and leaves a signed receipt anyone can verify offline.
 
-**Agents that can't do what you never allowed.**
+## What you get
 
-### Check it without an account
+The permission lives with Proofable, so the same limits hold wherever the agent runs.
 
-About two minutes. It forges 15 real receipts ten ways each. Every forgery fails, every real one passes.
-
-```bash
-git clone --depth 1 https://github.com/proofable/docs
-cd docs/public/evidence/checks && npm install
-node tamper-check.mjs
-```
-
----
-
-## Where it stands
-
-Every action is checked against a permission its owner signed before it runs, and leaves a receipt anyone can verify. Same checks on every benchmark.
-
-| Benchmark | Result |
-|---|---|
-| **NVIDIA Live Agent Gauntlet** | **#1 of 20 teams: 98.00** |
-| **AgentDojo** (ETH Zurich, prompt injection) | Attacks that landed fell from 16.4% to 6.2% on the same model, with 87% of tasks still done under attack |
-| **PrecisionMemBench** (agent memory) | **77 of 77** cases. Hindsight passed 66 on the same open toolkit; Mem0 and Zep passed 9 |
-| **AgentGovBench** (agent governance) | **48 of 48** scenarios. The best gateway handled 46; coding agents on their own handled 13 |
-
-Method, sources and raw results for every row, plus our own tests (a hijacked agent, forged receipts) with how to rerun them: [docs.proofable.me/benchmark](https://docs.proofable.me/benchmark). The forgery test runs with [no account](https://github.com/proofable/docs/tree/main/public/evidence/checks).
-
----
-
-## Overview
-
-The permission lives with Proofable, not with the runtime. Run the agent anywhere and the same limits hold in each place. Revoke it once and every copy stops. A prompt-injected agent still can't cross the line, because the decision is made outside its process.
-
-**Key Capabilities:**
 
 - **Its own identity** - a key and a signed identity tied to you, created by `npm run setup`
 - **A permission instead of a key** - the actions it may take, a spend cap and an end date, checked before every call
@@ -156,6 +121,27 @@ Edit `agent.json`, then run `npm run setup`.
 | `permission.expiresInDays` | When access ends. Leave it out and the permission has no end date until you revoke it. |
 | `permission.maxSpend` | Spend cap in USDC base units (`1000000` is 1 USDC); `0` for an agent that never pays |
 | `listing` | The service buyers order: name, description, the repository input, and the prompt each order runs |
+
+## Results
+
+| Benchmark | Result |
+|---|---|
+| **NVIDIA Live Agent Gauntlet** | **#1 of 20 teams: 98.00** |
+| **AgentDojo** (ETH Zurich, prompt injection) | Attacks that landed fell from 16.4% to 6.2% on the same model, with 87% of tasks still done under attack |
+| **PrecisionMemBench** (agent memory) | **77 of 77** cases. Hindsight passed 66 on the same open toolkit; Mem0 and Zep passed 9 |
+| **AgentGovBench** (agent governance) | **48 of 48** scenarios. The best gateway handled 46; coding agents on their own handled 13 |
+| **Hijacked agent** | **0 of 6** data-theft attempts got out, against 6 of 6 on an all-purpose key |
+| **Forgery test** | **150 of 150** forged receipts caught |
+
+Check the receipts yourself, no account needed (about two minutes):
+
+```bash
+git clone --depth 1 https://github.com/proofable/docs
+cd docs/public/evidence/checks && npm install
+node tamper-check.mjs
+```
+
+Methods and raw results: [proofable.me/benchmarks](https://proofable.me/benchmarks)
 
 ## CI
 
