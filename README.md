@@ -28,6 +28,16 @@
 
 Proofable checks every action this agent takes, from your AI tools, a hosted runtime or CI, against a permission you sign, outside the agent and before it runs, and leaves a signed receipt anyone can verify offline.
 
+## Try it now, no account
+
+Forge 15 real receipts ten ways each and watch every forgery fail. It takes about a minute.
+
+```bash
+git clone --depth 1 https://github.com/proofable/docs
+cd docs/public/evidence/checks && npm install
+node tamper-check.mjs
+```
+
 ## What you get
 
 The permission lives with Proofable, so the same limits hold wherever the agent runs.
@@ -132,14 +142,6 @@ Edit `agent.json`, then run `npm run setup`.
 | **AgentGovBench** (agent governance) | **48 of 48** scenarios. The best gateway handled 46; coding agents on their own handled 13 |
 | **Hijacked agent** | **0 of 6** data-theft attempts got out, against 6 of 6 on an all-purpose key |
 | **Forgery test** | **150 of 150** forged receipts caught |
-
-Check the receipts yourself, no account needed (about two minutes):
-
-```bash
-git clone --depth 1 https://github.com/proofable/docs
-cd docs/public/evidence/checks && npm install
-node tamper-check.mjs
-```
 
 Methods and raw results: [proofable.me/benchmarks](https://proofable.me/benchmarks)
 
