@@ -30,7 +30,7 @@ Proofable checks every action this agent takes, from your AI tools, a hosted run
 
 ## What you get
 
-The permission lives with Proofable, not the runtime, so the same limits hold wherever the agent runs.
+The permission lives with Proofable, so the same limits hold wherever the agent runs.
 
 
 - **Its own identity** - a key and a signed identity tied to you, created by `npm run setup`
@@ -130,8 +130,10 @@ Edit `agent.json`, then run `npm run setup`.
 | **AgentDojo** (ETH Zurich, prompt injection) | Attacks that landed fell from 16.4% to 6.2% on the same model, with 87% of tasks still done under attack |
 | **PrecisionMemBench** (agent memory) | **77 of 77** cases. Hindsight passed 66 on the same open toolkit; Mem0 and Zep passed 9 |
 | **AgentGovBench** (agent governance) | **48 of 48** scenarios. The best gateway handled 46; coding agents on their own handled 13 |
+| **Hijacked agent** | **0 of 6** data-theft attempts got out, against 6 of 6 on an all-purpose key |
+| **Forgery test** | **150 of 150** forged receipts caught |
 
-Check the receipts yourself, no account needed. It forges 15 real receipts ten ways each; every forgery fails and every real one passes (about two minutes):
+Check the receipts yourself, no account needed (about two minutes):
 
 ```bash
 git clone --depth 1 https://github.com/proofable/docs
